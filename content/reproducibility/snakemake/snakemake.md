@@ -2,7 +2,7 @@
 
 Make is an old (1976) which was originally developed for compiling and building executable programs from source code. There are newer packages which are targeted at the need to run consistent, reproducible experiments which are more appropriate in most of our situations where we need to run a pipeline of jobs.
 
-There are many alternatives to Make, a discussion of them can be seen here:
+There are many alternatives to Make for workflow management, a discussion of them can be seen here:
    https://www.biostars.org/p/91301/
 
 We will give a brief overview of Snakemake, a 'workflow management system is a tool to create reproducible and scalable data analyses'. You can find more information on it here:
