@@ -504,16 +504,16 @@ titles01/tt0017925,tt0017925,Der General (1926),der general,http://www.imdb.com/
 
 While on the surface this looks like a regular CSV file, when you try to open 
 it with the Python CSV library, or Pandas, or R's ``read_csv``, or even 
-``readr:read_csv``, the data is not loaded correctly. It turns out that the 
+``readr:read_csv``, the data is not loaded correctly. This happens because the 
 CSV file uses an escape character ``\`` when movie names have commas in them 
-and the CSV readers can't detect this variation in the CSV format.  It turns 
-out that this is quite a common issue for data scientists: CSV files are often 
-messy and use an uncommon *dialect*: a strange delimiter, uncommon quote 
-characters, etc. Collectively, data scientists waste quite some time on these 
-data wrangling issues where manual intervention is needed.  However, this 
-problem is also not that easy to solve: to a computer a CSV file is simply a 
-long string of characters, so how do we determine the dialect accurately in 
-general?
+and the CSV readers don't automatically detect this variation in the CSV 
+format.  It turns out that this is quite a common issue for data scientists: 
+CSV files are often messy and use an uncommon *dialect*: a strange delimiter, 
+uncommon quote characters, etc.  Collectively, data scientists waste quite 
+some time on these data wrangling issues where manual intervention is needed. 
+But this problem is also not that easy to solve: to a computer a CSV file is 
+simply a long string of characters, so how do we determine the dialect 
+accurately in general?
 
 Recently, researchers from the Alan Turing Institute have presented a method 
 that achieves 97% accuracy on a large corpus of CSV files, with an improvement 
@@ -522,9 +522,9 @@ made reproducible through the use of Make and is available through an online
 repository: 
 [https://github.com/alan-turing-institute/CSV_Wrangling](https://github.com/alan-turing-institute/CSV_Wrangling).
 
-Below we will briefly describe what the Makefile for such a project looks 
-like. For the complete file, please see the repository. The Makefile consists 
-of several sections:
+Below we will briefly describe how the Makefile for such a project looks like. 
+For the complete file, please see the repository. The Makefile consists of 
+several sections:
 
 1. Data collection: because the data is collected from public sources, the 
    repository contains a Python script that allows anyone to download the data 
@@ -560,7 +560,7 @@ of several sections:
    ```
 
 It is important to emphasize that this file was not created in one go, but was 
-constructed iteratively. The file started as a way to run several dialect 
+constructed iteratively. The Makefile started as a way to run several dialect 
 detection methods on a collection of input files and gradually grew to include 
 the creation of figures and tables from the result files. Thus the advice for 
 using Make for reproducible research is to start small and to start using Make 
