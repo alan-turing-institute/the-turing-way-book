@@ -166,7 +166,7 @@ output directory. We're doing this to keep the LaTeX intermediate files in the
 report directory. However, it's important to distinguish the above rule from 
 the following:
 
-```Makefile
+```makefile
 # don't do this
 output/report.pdf: report/report.tex output/figure_1.png output/figure_2.png
         cd report/
@@ -199,7 +199,7 @@ Let's remedy this by adding two new targets: ``all`` and ``clean``. Again,
 open your editor and change the contents to add the ``all`` and ``clean`` 
 rules:
 
-```Makefile
+```makefile
 # Makefile for analysis report
 
 all: output/report.pdf
@@ -246,7 +246,7 @@ always be run if they come up in a dependency, but will no longer be run if a
 directory/file is created that is called ``all`` or ``clean``. We therefore 
 add a line at the top of the Makefile so that it looks like this:
 
-```Makefile
+```makefile
 # Makefile for analysis report
 
 .PHONY: all clean
@@ -294,7 +294,7 @@ Rules](https://www.gnu.org/software/make/manual/html_node/Pattern-Rules.html#Pat
 prerequisites and targets in the recipe. Here's how we would do that for the 
 figure rules:
 
-```Makefile
+```makefile
 # Makefile for analysis report
 
 .PHONY: all clean
@@ -327,7 +327,7 @@ Because we don't like to repeat ourselves, we can combine the two rules into a
 single one by using pattern rules. Pattern rules allow you to use the ``%`` 
 symbol as a wildcard and combine the two rules into one:
 
-```Makefile
+```makefile
 # Makefile for analysis report
 
 .PHONY: all clean
@@ -390,7 +390,7 @@ to remove the output files.
 First, we'll create a variable that lists all the CSV files in the data 
 directory and one that lists only the old ``input_file_{N}.csv`` files:
 
-```Makefile
+```makefile
 ALL_CSV = $(wildcard data/*.csv)
 INPUT_CSV = $(wildcard data/input_file_*.csv)
 ```
@@ -401,7 +401,7 @@ define them at the top of the file.
 Next, we'll list just the data that we're interested in by filtering out the 
 ``INPUT_CSV`` from ``ALL_CSV``:
 
-```Makefile
+```makefile
 DATA = $(filter-out $(INPUT_CSV),$(ALL_CSV))
 ```
 
@@ -412,7 +412,7 @@ variable.  Note that we use both the ``$( ... )`` syntax for functions and
 variables (the ``${ ...  }`` syntax also works). Finally, we'll use the 
 ``DATA`` variable to create a ``FIGURES`` variable with the desired output:
 
-```Makefile
+```makefile
 FIGURES = $(patsubst data/%.csv,output/figure_%.png,$(DATA))
 ```
 
@@ -424,7 +424,7 @@ function to transform the input in the ``DATA`` variable (that follows the
 
 Now we can use these variables for the figure generation rule as follows:
 
-```Makefile
+```makefile
 $(FIGURES): output/figure_%.png: data/%.csv scripts/generate_histogram.py
         python scripts/generate_histogram.py -i $< -o $@
 ```
@@ -438,14 +438,14 @@ rule](https://www.gnu.org/software/make/manual/make.html#Static-Pattern).
 
 Of course we also have to update the ``report.pdf`` rule:
 
-```Makefile
+```makefile
 output/report.pdf: report/report.tex $(FIGURES)
 	cd report/ && pdflatex report.tex && mv report.pdf ../$@
 ```
 
 and the ``clean`` rule:
 
-```Makefile
+```makefile
 clean:
 	rm -f output/report.pdf
 	rm -f $(FIGURES)
@@ -453,7 +453,7 @@ clean:
 
 The resulting Makefile should now look like this:
 
-```Makefile
+```makefile
 # Makefile for analysis report
 #
 
@@ -540,7 +540,7 @@ several sections:
 
 3. The rules for the detection results follow a specific signature:
 
-   ```Makefile
+   ```makefile
    $(OUT_DETECT)/out_sniffer_%.json: $(OUT_PREPROCESS)/all_files_%.txt
            python $(SCRIPT_DIR)/run_detector.py sniffer $(DETECTOR_OPTS) $< $@
    ```
@@ -554,7 +554,7 @@ several sections:
    Therefore, these depend on a special ``check_clean`` target that asks the 
    user to confirm before proceeding:
 
-   ```Makefile
+   ```makefile
    check_clean:
         @echo -n "Are you sure? [y/N]" && read ans && [ $$ans == y ]
    ```
