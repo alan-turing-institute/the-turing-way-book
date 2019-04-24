@@ -169,9 +169,9 @@ the following:
 ```makefile
 # don't do this
 output/report.pdf: report/report.tex output/figure_1.png output/figure_2.png
-        cd report/
-        pdflatex report.tex
-        mv report.pdf ../output/report.pdf
+	cd report/
+	pdflatex report.tex
+	mv report.pdf ../output/report.pdf
 ```
 
 This rule places the three commands on separate lines. However, Make executes 
@@ -214,8 +214,8 @@ output/report.pdf: report/report.tex output/figure_1.png output/figure_2.png
 	cd report/ && pdflatex report.tex && mv report.pdf ../output/report.pdf
 
 clean:
-        rm -f output/report.pdf
-        rm -f output/figure_*.png
+	rm -f output/report.pdf
+	rm -f output/figure_*.png
 ```
 
 Note that we've added the ``all`` target to the top of the file. This is 
@@ -263,8 +263,8 @@ output/report.pdf: report/report.tex output/figure_1.png output/figure_2.png
 	cd report/ && pdflatex report.tex && mv report.pdf ../output/report.pdf
 
 clean:
-        rm -f output/report.pdf
-        rm -f output/figure_*.pdf
+	rm -f output/report.pdf
+	rm -f output/figure_*.pdf
 ```
 
 Phony targets are also useful when you want to use Make recursively. In that 
@@ -302,17 +302,17 @@ figure rules:
 all: output/report.pdf
 
 output/figure_1.png: data/input_file_1.csv scripts/generate_histogram.py
-        python scripts/generate_histogram.py -i $< -o $@
+	python scripts/generate_histogram.py -i $< -o $@
 
 output/figure_2.png: data/input_file_2.csv scripts/generate_histogram.py
-        python scripts/generate_histogram.py -i $< -o $@
+	python scripts/generate_histogram.py -i $< -o $@
 
 output/report.pdf: report/report.tex output/figure_1.png output/figure_2.png
 	cd report/ && pdflatex report.tex && mv report.pdf ../output/report.pdf
 
 clean:
-        rm -f output/report.pdf
-        rm -f output/figure_*.pdf
+	rm -f output/report.pdf
+	rm -f output/figure_*.pdf
 ```
 
 We've replaced the input and output filenames in the recipes respectively by 
@@ -335,14 +335,14 @@ symbol as a wildcard and combine the two rules into one:
 all: output/report.pdf
 
 output/figure_%.png: data/input_file_%.csv scripts/generate_histogram.py
-        python scripts/generate_histogram.py -i $< -o $@
+	python scripts/generate_histogram.py -i $< -o $@
 
 output/report.pdf: report/report.tex output/figure_1.png output/figure_2.png
 	cd report/ && pdflatex report.tex && mv report.pdf ../output/report.pdf
 
 clean:
-        rm -f output/report.pdf
-        rm -f output/figure_*.pdf
+	rm -f output/report.pdf
+	rm -f output/figure_*.pdf
 ```
 
 The ``%`` symbol is now a wildcard that (in our case) takes the value ``1`` or 
@@ -426,7 +426,7 @@ Now we can use these variables for the figure generation rule as follows:
 
 ```makefile
 $(FIGURES): output/figure_%.png: data/%.csv scripts/generate_histogram.py
-        python scripts/generate_histogram.py -i $< -o $@
+	python scripts/generate_histogram.py -i $< -o $@
 ```
 
 Note that this rule again applies a pattern: it takes a list of targets 
@@ -542,7 +542,7 @@ several sections:
 
    ```makefile
    $(OUT_DETECT)/out_sniffer_%.json: $(OUT_PREPROCESS)/all_files_%.txt
-           python $(SCRIPT_DIR)/run_detector.py sniffer $(DETECTOR_OPTS) $< $@
+	python $(SCRIPT_DIR)/run_detector.py sniffer $(DETECTOR_OPTS) $< $@
    ```
 
    The ``%`` symbol is used to create outputs for both sources of CSV files 
@@ -556,7 +556,7 @@ several sections:
 
    ```makefile
    check_clean:
-        @echo -n "Are you sure? [y/N]" && read ans && [ $$ans == y ]
+	@echo -n "Are you sure? [y/N]" && read ans && [ $$ans == y ]
    ```
 
 It is important to emphasize that this file was not created in one go, but was 
