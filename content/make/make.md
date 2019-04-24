@@ -543,7 +543,7 @@ several sections:
 
    ```makefile
    $(OUT_DETECT)/out_sniffer_%.json: $(OUT_PREPROCESS)/all_files_%.txt
-	python $(SCRIPT_DIR)/run_detector.py sniffer $(DETECTOR_OPTS) $< $@
+   	python $(SCRIPT_DIR)/run_detector.py sniffer $(DETECTOR_OPTS) $< $@
    ```
 
    The ``%`` symbol is used to create outputs for both sources of CSV files 
@@ -557,7 +557,7 @@ several sections:
 
    ```makefile
    check_clean:
-	@echo -n "Are you sure? [y/N]" && read ans && [ $$ans == y ]
+   	@echo -n "Are you sure? [y/N]" && read ans && [ $$ans == y ]
    ```
 
 It is important to emphasize that this file was not created in one go, but was 
