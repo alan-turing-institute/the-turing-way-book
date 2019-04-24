@@ -121,7 +121,7 @@ Let's create our first Makefile. In the terminal, move into the
 ``IntroToMake`` repository that you just cloned and, using your favorite 
 editor, create a file called ``Makefile`` with the following contents:
 
-```Makefile
+```makefile
 # Makefile for analysis report
 
 output/figure_1.png: data/input_file_1.csv scripts/generate_histogram.py
