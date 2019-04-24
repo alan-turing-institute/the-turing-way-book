@@ -133,6 +133,8 @@ output/figure_2.png: data/input_file_2.csv scripts/generate_histogram.py
 output/report.pdf: report/report.tex output/figure_1.png output/figure_2.png
 	cd report/ && pdflatex report.tex && mv report.pdf ../output/report.pdf
 ```
+The indentation in each of the recipes are ***tabs***, Makefiles do not accept 
+indentation with spaces.
 
 To test that everything works correctly, you should now be able to type:
 
