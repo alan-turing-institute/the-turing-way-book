@@ -648,7 +648,7 @@ To install GNU Make, please follow these instructions:
   Linux:
 
   ```bash
-  $ pacman -S make
+  $ sudo pacman -S make
   ```
 
   Ubuntu:
