@@ -51,20 +51,20 @@ this is a [directed acyclic graph](#directed-acyclic-graph)).  It uses the
 There are several reasons why Make is a good tool to use for reproducible 
 research:
 
-1. Make is available on many platforms
 1. Make is easy to learn
-1. Makefiles are human-readable and machine-readable text files. So instead of 
-   writing instructions to a human for how to build a report or output, you 
-   can provide a Makefile with instructions that can be read by a human *and* 
-   executed by a computer.
+1. Make is available on many platforms
+1. Many people are already familiar with Make
 1. Makefile reduce cognitive load because as long as the common make targets 
    ``all`` and ``clean`` are present (explained below), you can be up and 
    running without having to read lengthy instructions. This is great 
    especially when you work on someone else's project or on one that you 
    haven't used in a long time.
+1. Makefiles are human-readable and machine-readable text files. So instead of 
+   writing instructions to a human for how to build a report or output, you 
+   can provide a Makefile with instructions that can be read by a human *and* 
+   executed by a computer.
 1. Because Makefiles are text files they are easy to share and keep in version 
    control.
-1. Many people are already familiar with Make
 1. Using Make doesn't exclude using other tools such as Travis, Docker, etc.
 
 ## Learn Make by Example
