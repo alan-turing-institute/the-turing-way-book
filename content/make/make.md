@@ -112,8 +112,9 @@ installed:
 pip install [--user] matplotlib numpy
 ```
 
-You will also need a working version of ``pdflatex`` and, of course, 
-``make``.
+You will also need a working version of ``pdflatex`` and, of course, ``make``. 
+For installation instructions, see [the installation instructions 
+below](#Installing-make).
 
 #### Makefile no. 1 (The Basics)
 
