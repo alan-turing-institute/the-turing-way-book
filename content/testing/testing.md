@@ -22,8 +22,7 @@
         1. [Use random number seeds](#Use_random_number_seeds)
         2. [Measure the distribution of results](#Measure_the_distribution_of_results)
     10. [Tests that are difficult to quantify](#Tests_that_are_difficult_to_quantify)
-    11. [Code review](#Code_review)
-    12. [Testing if non-integer numbers are equal](#Testing_if_non_integer_numbers_are_equal)
+    11. [Testing if non-integer numbers are equal](#Testing_if_non_integer_numbers_are_equal)
         1. [When 0.1 + 0.2 does not equal 0.3](#When_point_1_plus_point_2_does_not_equal_point_3)
         2. [Equality in a floating point world](#Equality_in_a_floating_point_world)
 4. [Types of tests](#Types_of_tests)
@@ -154,11 +153,13 @@ There are tools available to make writing and running tests easier, these are kn
 <a name="Aim_to_have_a_good_code_coverage"></a>
 ### Aim to have a good code coverage
 
-Code coverage is a measure of how much of your code is "covered" by tests. More precicely it a measure of how much of your code is run when tests are conducted. So for example, if you have a `if` statement but only test things where that if statement evaluates to "True" then none of the code that comes under "False" will be run. As a result your code coverage would be < 100% (the exact number would depend on how much code comes under the True and False cases). Code coverage doesn't include documentation like comments, so adding more documentation doesn't affect your percentages.
+Code coverage is a measure of how much of your code is "covered" by tests. More precisely it a measure of how much of your code is run when tests are conducted. So for example, if you have a `if` statement but only test things where that if statement evaluates to "True" then none of the code that comes under "False" will be run. As a result your code coverage would be < 100% (the exact number would depend on how much code comes under the True and False cases). Code coverage doesn't include documentation like comments, so adding more documentation doesn't affect your percentages.
 
 As [mentioned](#Write_tests_any_tests) any tests are an improvement over no tests. Nevertheless it is good to at least aspire to having your code coverage as high as feasible.
 
 Most programming languages have tools either built into them, or that can be imported, or as part of testing frameworks, which automatically measure code coverage. There's also a nice little [bot](https://codecov.io/) for measuring code coverage available too.
+
+**Pitfall: The illusion of good coverage.** In some instances, the same code can and probably should be tested in multiple ways. For example, coverage can quickly increase on code that applies "sanity check" tests to its output ([see below](#tests-that-are-difficult-to-quantify)), but this doesn't preclude the risk that the code is producing the broadly right answer for the wrong reasons. In general, the best tests are those that isolate the smaller rather than larger chunks of coherent code, and so pick out individual steps of logic. Try to be guided by thinking about the possible things that might happen to a particular chunk of code in the execution of the whole, and test these individual cases. Often, this will result in the same code being tested multiple times - this is a good thing!
 
 <a name="Use_test_doubles_stubs_mocking_where_appropriate"></a>
 ### Use test doubles/stubs/mocking where appropriate
@@ -261,13 +262,6 @@ All of these outputs look very different but are valid. However, if a researcher
 ![eyeball_test_error](/assets/figures/eyeball_test_error.jpg)
 
 they could easily conclude there is a bug as a lake is unlikely to triple it's volume and then lose it again in the space of a few hours. "Eyeballing" tests like these are time consuming as they must be done by a human. However the process can be partially or fully automated by creating basic "sanity checks". For example the water level at one time should be within, say, 10% of the water level at the previous time step. Another check could be that there are no negative values, as a lake can't be -30% full. These sort of tests can't cover every way something can be visibly wrong, but they are much easier to automate and will suffice for most cases.
-
-<a name="Code_review"></a>
-### Code review
-
-Code review is a way of testing code quality. In it a programmer looks at and reviews another's code. The goal is to point out strengths and also potential areas of improvement. Code review is often done in pairs, with each reviewer also having some of their code reviewed by their partner. Doing this can help programmers see and discuss issues, alternative approaches to tasks, and learn tips and tricks.
-
-Because of their nature code reviews act a qualitative rather than quantitive tests, but are no less valuable for that.
 
 <a name="Testing_if_non_integer_numbers_are_equal"></a>
 ### Testing if non-integer numbers are equal
@@ -660,7 +654,7 @@ This checklist contains a lot of items. As [mentioned](#Write_tests_any_tests) i
 <a name="What_to_learn_next"></a>
 ## What to learn next
 
-Try reading the chapter on reproducible computational environments and then the chapter on continuous integration.
+Try reading the chapter on reproducible computational environments and then the chapter on continuous integration. The chapter on reviewing outlines how you can further strengthen your code base by adding a formal reviewing stage to your development workflow.
 
 <a name="Further_reading"></a>
 ## Further reading
