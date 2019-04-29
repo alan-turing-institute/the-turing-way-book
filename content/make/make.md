@@ -4,7 +4,7 @@
 
 | Prerequisite | Importance | Notes |
 | ------------ | ---------- | ----- |
-| Experience with the command line | Necessary | |
+| Experience with the command line | Necessary | [Tutorial on the Unix shell](https://swcarpentry.github.io/shell-novice/) |
 | Version control | Helpful | Experience using git is useful to follow along with examples |
 
 Recommended skill level: intermediate
