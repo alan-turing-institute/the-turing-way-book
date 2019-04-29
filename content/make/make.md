@@ -11,16 +11,27 @@ Recommended skill level: intermediate
 
 ## Table of contents
 
-- [Summary](#Summary)
-- [An introduction to Make](#an_introduction_to_make)
-  - [What is Make?](#What_is_make)
-  - [Why use Make for reproducible research?]()
-- [Learning Make by example]()
-- [Example of a real reproducible paper with Make]()
-- [Further reading]()
-- [Definitions/glossary]()
-- [Bibliography](#Bibliography)
-
+- [Summary](#summary)
+- [An Introduction to Make](#an-introduction-to-make)
+  - [What is Make](#what-is-make)
+  - [Why use Make for Reproducible Research?](#why-use-make-for-reproducible-research)
+- [Learn Make by Example](#learn-make-by-example)
+  - [A Data Analysis Pipeline](#a-data-analysis-pipeline)
+    - [Setting up](#setting-up)
+    - [Makefile no. 1 (The Basics)](#makefile-no-1-the-basics)
+    - [Makefile no. 2 (all and clean)](#makefile-no-2-all-and-clean)
+    - [Makefile no. 3 (Phony Targets)](#makefile-no-3-phony-targets)
+    - [Makefile no. 4 (Automatic Variables and Pattern Rules)](#makefile-no-4-automatic-variables-and-pattern-rules)
+    - [Makefile no. 5 (Wildcards and Path Substitution)](#makefile-no-5-wildcards-and-path-substitution)
+- [A Real Reproducible Paper using Make](#a-real-reproducible-paper-using-make)
+- [Further Reading](#further-reading)
+  - [Sites and Tools](#sites-and-tools)
+  - [Alternatives to Make](#alternatives-to-make)
+- [Glossary](#glossary)
+- [Bibliography](#bibliography)
+- [Appendix](#appendix)
+  - [Directed Acyclic Graph](#directed-acyclic-graph)
+  - [Installing Make](#installing-make)
 
 ## Summary
 
@@ -616,7 +627,7 @@ time than the slow builds!
   more flexible than Make because it doesn't just rely on modification time. 
   Makefile is now essentially a bash script.
 
-## Definitions/Glossary
+## Glossary
 
 **Makefile:** a text file that contains the configuration for the build
 
