@@ -193,6 +193,8 @@ This is what the dependency tree looks like for this Makefile:
 
 ![DAG for Makefile no. 1](/assets/figures/make/makefile_no_1.png)
 
+(created with [makefile2graph](#tools))
+
 
 ### Makefile no. 2 (all and clean)
 
@@ -582,7 +584,15 @@ the code, the results, and the manuscript.
 
 ## Further Reading
 
-### Sites and Tools
+### Manual
+
+- [The Official Make Reference 
+  manual](https://www.gnu.org/software/make/manual/make.html).
+
+### Discussions
+
+- [Discussion on Make on 
+  HackerNews](https://news.ycombinator.com/item?id=15041986).
 
 - [Recursive Make Considered 
   Harmful](http://aegis.sourceforge.net/auug97.pdf). This is a well-known 
@@ -594,7 +604,28 @@ the code, the results, and the manuscript.
   This is a research paper describing the failings of Make for large and 
   complex builds.
 
-- [Discussion on HN on Make](https://news.ycombinator.com/item?id=15041986).
+### Blogs
+
+Of course we are not the first to suggest the use of Make for reproducibility! 
+The blog posts cited here were found after the above tutorial was written, but 
+can add further information and examples.
+
+- [Reproducibility is 
+  hard](https://kbroman.wordpress.com/tag/reproducible-research/). Discusses 
+  making a research project reproducible using Make.
+
+- [GNU Make for Reproducible Data Analysis](http://zmjones.com/make/). Argues 
+  for using make for reproducible analysis in a similar vein as we do above.
+
+- [Reproducible Bioinformatics Pipelines using 
+  Make](http://byronjsmith.com/make-bml/). A quite extensive tutorial on using 
+  make for data analysis.
+
+- [Automatic Data-analysis 
+  Pipelines](http://stat545.com/automation04_make-activity.html). A similar 
+  tutorial that uses R for the analysis.
+
+### Tools
 
 - Plot the DAG of the Makefile with 
   [makefile2graph](https://github.com/lindenb/makefile2graph).
@@ -646,8 +677,6 @@ filesystem. A target is marked as phony by making it a prerequisite of the
 
 **Pattern:** A pattern rule is a rule that contains exactly one ``%`` 
 character in the target, which can be used to match a part of a filename.
-
-## Bibliography
 
 ## Appendix
 
