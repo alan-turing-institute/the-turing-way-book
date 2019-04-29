@@ -100,7 +100,7 @@ follows:
 To start, clone the base repository:
 
 ```bash
-git clone https://github.com/GjjvdBurg/IntroToMake
+git clone https://github.com/alan-turing-institute/IntroToMake
 ```
 
 This basic repository contains all the code that we'll need in this tutorial:
