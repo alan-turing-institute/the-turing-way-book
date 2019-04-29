@@ -641,6 +641,11 @@ system until you run into a problem with your current one. Optimising your
 build system might lead you down to a rabbit hole that ends up taking more 
 time than the slow builds!
 
+- [SnakeMake](https://snakemake.readthedocs.io/en/stable/). A Python3-based 
+  alternative to Make. Snakemake supports multiple wildcards in filenames, 
+  supports Python code in rules, and can run workflows on workstations, 
+  clusters, the grid, and in the cloud without modification. 
+
 - [Bazel](https://www.bazel.build). An open-source version of Google's Blaze 
   build system.
 
