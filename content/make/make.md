@@ -16,13 +16,12 @@ Recommended skill level: intermediate
   - [What is Make](#what-is-make)
   - [Why use Make for Reproducible Research?](#why-use-make-for-reproducible-research)
 - [Learn Make by Example](#learn-make-by-example)
-  - [A Data Analysis Pipeline](#a-data-analysis-pipeline)
-    - [Setting up](#setting-up)
-    - [Makefile no. 1 (The Basics)](#makefile-no-1-the-basics)
-    - [Makefile no. 2 (all and clean)](#makefile-no-2-all-and-clean)
-    - [Makefile no. 3 (Phony Targets)](#makefile-no-3-phony-targets)
-    - [Makefile no. 4 (Automatic Variables and Pattern Rules)](#makefile-no-4-automatic-variables-and-pattern-rules)
-    - [Makefile no. 5 (Wildcards and Path Substitution)](#makefile-no-5-wildcards-and-path-substitution)
+  - [Setting up](#setting-up)
+  - [Makefile no. 1 (The Basics)](#makefile-no-1-the-basics)
+  - [Makefile no. 2 (all and clean)](#makefile-no-2-all-and-clean)
+  - [Makefile no. 3 (Phony Targets)](#makefile-no-3-phony-targets)
+  - [Makefile no. 4 (Automatic Variables and Pattern Rules)](#makefile-no-4-automatic-variables-and-pattern-rules)
+  - [Makefile no. 5 (Wildcards and Path Substitution)](#makefile-no-5-wildcards-and-path-substitution)
 - [A Real Reproducible Paper using Make](#a-real-reproducible-paper-using-make)
 - [Further Reading](#further-reading)
   - [Sites and Tools](#sites-and-tools)
@@ -88,8 +87,6 @@ Make by iterating through several versions of a Makefile for this project.
 Hopefully the experience that you gain from this tutorial allows you to create 
 Makefiles for your own projects.
 
-### A Data Analysis Pipeline
-
 We will create a ``Makefile`` for a data analysis pipeline. The task is as 
 follows:
 
@@ -98,7 +95,7 @@ follows:
 
 (Of course this data task is very simple to focus on how to use Make.)
 
-#### Setting up
+### Setting up
 
 To start, clone the base repository:
 
@@ -127,7 +124,7 @@ You will also need a working version of ``pdflatex`` and, of course, ``make``.
 For installation instructions, see [the installation instructions 
 below](#installing-make).
 
-#### Makefile no. 1 (The Basics)
+### Makefile no. 1 (The Basics)
 
 Let's create our first Makefile. In the terminal, move into the 
 ``IntroToMake`` repository that you just cloned and, using your favorite 
@@ -197,7 +194,7 @@ This is what the dependency tree looks like for this Makefile:
 ![DAG for Makefile no. 1](/assets/figures/make/makefile_no_1.png)
 
 
-#### Makefile no. 2 (all and clean)
+### Makefile no. 2 (all and clean)
 
 In our first Makefile we have the basic rules in place. We could stick with 
 this if we wanted to, but there are a few improvements we can make:
@@ -249,7 +246,7 @@ $ make clean
 $ make
 ```
 
-#### Makefile no. 3 (Phony Targets)
+### Makefile no. 3 (Phony Targets)
 
 Typically, ``all`` and ``clean`` are defined as so-called [Phony 
 Targets](https://www.gnu.org/software/make/manual/make.html#Phony-Targets). 
@@ -290,8 +287,7 @@ declared as phony.
 > have a directory of tests called **test** and want to have a target to run 
 > them that's also called **test**.
 
-<a name="makefile_auto_var_and_pat_rule">
-#### Makefile no. 4 (Automatic Variables and Pattern Rules)
+### Makefile no. 4 (Automatic Variables and Pattern Rules)
 
 There's nothing wrong with the Makefile we have now, but it's somewhat verbose 
 because we've declared all the targets explicitly using separate rules. We can 
@@ -362,7 +358,7 @@ The ``%`` symbol is now a wildcard that (in our case) takes the value ``1`` or
 everything still works by running ``make clean`` followed by ``make``.
 
 
-#### Makefile no. 5 (Wildcards and Path Substitution)
+### Makefile no. 5 (Wildcards and Path Substitution)
 
 When Makefiles get more complex, you may want to use more "bash-like" features 
 such as building outputs for all the files in an input directory. While 
