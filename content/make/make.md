@@ -641,18 +641,18 @@ system until you run into a problem with your current one. Optimising your
 build system might lead you down to a rabbit hole that ends up taking more 
 time than the slow builds!
 
-- [Bazel](https://www.bazel.build): An open-source version of Google's Blaze 
+- [Bazel](https://www.bazel.build). An open-source version of Google's Blaze 
   build system.
 
-- [Buck](https://buckbuild.com/): Facebook's build system.
+- [Buck](https://buckbuild.com/). Facebook's build system.
 
-- [Tup](http://gittup.org/tup/index.html): a fast build system that processes 
+- [Tup](http://gittup.org/tup/index.html). A fast build system that processes 
   prerequisites bottom-up instead of Make's top-down. The speed looks 
   impressive and the paper describing it is interesting. Would have been great 
   if it could be run on Makefiles too instead of requiring a Tupfile with 
   different syntax.
 
-- [Walk](https://github.com/ejholmes/walk): Make alternative that claims to be 
+- [Walk](https://github.com/ejholmes/walk). Make alternative that claims to be 
   more flexible than Make because it doesn't just rely on modification time. 
   Makefile is now essentially a bash script.
 
