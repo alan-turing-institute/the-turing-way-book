@@ -54,11 +54,11 @@ research:
 1. Make is easy to learn
 1. Make is available on many platforms
 1. Many people are already familiar with Make
-1. Makefile reduce cognitive load because as long as the common make targets 
+1. Makefiles reduce cognitive load because as long as the common make targets 
    ``all`` and ``clean`` are present (explained below), you can be up and 
-   running without having to read lengthy instructions. This is great 
-   especially when you work on someone else's project or on one that you 
-   haven't used in a long time.
+   running without having to read lengthy instructions. This is especially 
+   useful when you work on someone else's project or on one that you haven't 
+   used in a long time.
 1. Makefiles are human-readable and machine-readable text files. So instead of 
    writing instructions to a human for how to build a report or output, you 
    can provide a Makefile with instructions that can be read by a human *and* 
