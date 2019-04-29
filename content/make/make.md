@@ -634,32 +634,25 @@ can add further information and examples.
 
 ### Alternatives to Make
 
-I'm not explicitly recommending any of these, but if you want features that 
-Make doesn't support or have a really big project with complex dependencies, 
-then here are some alternatives.  I would recommend not to optimise your build 
-system until you run into a problem with your current one. Optimising your 
-build system might lead you down to a rabbit hole that ends up taking more 
-time than the slow builds!
+There are [many alternatives to 
+Make](https://en.wikipedia.org/wiki/List_of_build_automation_software). Below 
+are two that caught our eye and that might be worth a look.
 
 - [SnakeMake](https://snakemake.readthedocs.io/en/stable/). A Python3-based 
   alternative to Make. Snakemake supports multiple wildcards in filenames, 
   supports Python code in rules, and can run workflows on workstations, 
   clusters, the grid, and in the cloud without modification. 
 
+- [Tup](http://gittup.org/tup/index.html). A fast build system that processes 
+  prerequisites bottom-up instead of Make's top-down. The speed looks 
+  impressive and the paper describing it is interesting, but for small 
+  projects Make's speed will not be a bottleneck. The Tupfile syntax is not 
+  compatible with that of Makefiles.
+
 - [Bazel](https://www.bazel.build). An open-source version of Google's Blaze 
   build system.
 
 - [Buck](https://buckbuild.com/). Facebook's build system.
-
-- [Tup](http://gittup.org/tup/index.html). A fast build system that processes 
-  prerequisites bottom-up instead of Make's top-down. The speed looks 
-  impressive and the paper describing it is interesting. Would have been great 
-  if it could be run on Makefiles too instead of requiring a Tupfile with 
-  different syntax.
-
-- [Walk](https://github.com/ejholmes/walk). Make alternative that claims to be 
-  more flexible than Make because it doesn't just rely on modification time. 
-  Makefile is now essentially a bash script.
 
 ## Glossary
 
