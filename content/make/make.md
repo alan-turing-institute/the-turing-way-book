@@ -72,7 +72,7 @@ research:
 1. Make is easy to learn
 1. Make is available on many platforms
 1. Many people are already familiar with Make
-1. Makefiles reduce cognitive load because as long as the common make targets 
+1. Makefiles reduce cognitive load because as long as the common Make targets 
    ``all`` and ``clean`` are present (explained below), you can be up and 
    running without having to read lengthy instructions. This is especially 
    useful when you work on someone else's project or on one that you haven't 
@@ -643,11 +643,11 @@ can add further information and examples.
   making a research project reproducible using Make.
 
 - [GNU Make for Reproducible Data Analysis](http://zmjones.com/make/). Argues 
-  for using make for reproducible analysis in a similar vein as we do above.
+  for using Make for reproducible analysis in a similar vein as we do above.
 
 - [Reproducible Bioinformatics Pipelines using 
   Make](http://byronjsmith.com/make-bml/). A quite extensive tutorial on using 
-  make for data analysis.
+  Make for data analysis.
 
 - [Automatic Data-analysis 
   Pipelines](http://stat545.com/automation04_make-activity.html). A similar 
@@ -735,7 +735,7 @@ have by typing:
 $ make --version
 ```
 
-If you don't have GNU make but have the BSD version, some things might not 
+If you don't have GNU Make but have the BSD version, some things might not 
 work as expected.
 
 To install GNU Make, please follow these instructions:
@@ -758,6 +758,6 @@ To install GNU Make, please follow these instructions:
   $ brew install make
   ```
 
-  If you have a builtin Make implementation, please ensure that it's GNU make 
+  If you have a builtin Make implementation, please ensure that it's GNU Make 
   by checking ``make --version``.
 
