@@ -200,8 +200,9 @@ combine the three commands in a single recipe above.
 This is what the dependency tree looks like for this Makefile:
 
 ![DAG for Makefile no. 1](/assets/figures/make/makefile_no_1.png)
-
-(created with [makefile2graph](#tools))
+<small>The dependency graph for our first Makefile, created using 
+[makefile2graph](#tools). Notice the similarity to the figure at the 
+top!</small>
 
 
 ### Makefile no. 2 (all and clean)
