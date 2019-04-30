@@ -35,21 +35,22 @@ Recommended skill level: intermediate
   - [Installing Make](#installing-make)
 
 
-![Schematic of a research project](/assets/figures/make/research_dag.png)
-<small>A schematic for a research project.</small>
 
 ## Summary
 
 A research project can be seen as a tree of dependencies: the paper depends on 
 the figures and tables, and these in turn depend on the data and the analysis 
-scripts used to process this data (see the above figure). Make is a tool for 
-creating output files from their dependencies through pre-specified rules. It 
-is possible to combine these two ideas to create a reproducible research 
-project with Make.  In this chapter we give an introduction to Make and 
-provide a tutorial on how Make can be used for a data analysis pipeline. We 
-also describe a real-world reproducible research project that uses Make to go 
-from the raw input data to the experiments all the way to the pdf file of the 
-paper!
+scripts used to process this data (illustrated in the figure below). Make is a 
+tool for creating output files from their dependencies through pre-specified 
+rules.  It is possible to combine these two ideas to create a reproducible 
+research project with Make.  In this chapter we give an introduction to Make 
+and provide a tutorial on how Make can be used for a data analysis pipeline. 
+We also describe a real-world reproducible research project that uses Make to 
+go from the raw input data to the experiments all the way to the pdf file of 
+the paper!
+
+![Schematic of a research project](/assets/figures/make/research_dag.png)
+<small>A schematic for a research project that uses LaTeX.</small>
 
 ## An Introduction to Make
 
