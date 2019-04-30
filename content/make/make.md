@@ -158,8 +158,14 @@ below](#installing-make).
 ### Makefile no. 1 (The Basics)
 
 Let's create our first Makefile. In the terminal, move into the 
-``IntroToMake`` repository that you just cloned and, using your favorite 
-editor, create a file called ``Makefile`` with the following contents:
+``IntroToMake`` repository that you just cloned:
+
+```bash
+$ cd IntroToMake
+```
+
+Using your favourite editor, create a file called ``Makefile`` with the 
+following contents:
 
 ```makefile
 # Makefile for analysis report
@@ -176,13 +182,13 @@ output/report.pdf: report/report.tex output/figure_1.png output/figure_2.png
 The indentation in each of the recipes are ***tabs***, Makefiles do not accept 
 indentation with spaces.
 
-To test that everything works correctly, you should now be able to type:
+You should now be able to type:
 
 ```bash
 $ make output/report.pdf
 ```
 
-If everything works correctly, the two figures will be created and pdf report 
+If everything worked correctly, the two figures will be created and pdf report 
 will be built.
 
 Let's go through the Makefile in a bit more detail. We have three rules, two 
@@ -214,11 +220,11 @@ output/report.pdf: report/report.tex output/figure_1.png output/figure_2.png
 	mv report.pdf ../output/report.pdf
 ```
 
-This rule places the three commands on separate lines. However, Make executes 
-each line independently in a separate subshell, so changing the working 
-directory in the first line has no effect on the second, and a failure in the 
-second line won't stop the third line from being executed. Therefore, we 
-combine the three commands in a single recipe above.
+This rule places the three commands on separate lines. However, **Make 
+executes each line independently** in a separate subshell, so changing the 
+working directory in the first line has no effect on the second, and a failure 
+in the second line won't stop the third line from being executed. Therefore, 
+we combine the three commands in a single recipe above.
 
 This is what the dependency tree looks like for this Makefile:
 
@@ -239,9 +245,9 @@ this if we wanted to, but there are a few improvements we can make:
 
 2. We have no way to clean up and start fresh.
 
-Let's remedy this by adding two new targets: ``all`` and ``clean``. Again, 
-open your editor and change the contents to add the ``all`` and ``clean`` 
-rules:
+Let's remedy this by adding two new targets: ``all`` and ``clean``. In your 
+editor, change the Makefile contents to add the ``all`` and ``clean`` rules as 
+follows:
 
 ```makefile
 # Makefile for analysis report
@@ -262,17 +268,18 @@ clean:
 	rm -f output/figure_*.png
 ```
 
-Note that we've added the ``all`` target to the top of the file. This is 
+Note that we've added the ``all`` target to the top of the file. We do this 
 because Make executes the *first* target when no explicit target is given.  So 
 you can now type ``make`` on the command line and it would do the same as 
-``make all``. Also, note that we've only added the report as the prerequisite 
+``make all``.  Also, note that we've only added the report as the prerequisite 
 of ``all`` because that's our desired output and the other rules help to build 
-that output. If you'd have multiple outputs, you could add these as further 
-prerequisites to the ``all`` target.
+that output. If you have multiple outputs, you could add these as further 
+prerequisites to the ``all`` target. Calling the main target ``all`` is a 
+convention of Makefiles that many people follow.
 
 The ``clean`` rule is typically at the bottom, but that's more style than 
-requirement. Note that we use the ``-f`` flag to ``rm`` to stop it complaining 
-when there is no file to remove.
+requirement. Note that we use the ``-f`` flag to ``rm`` to make sure it 
+doesn't complain when there is no file to remove.
 
 You can try out the new Makefile by running:
 
@@ -281,14 +288,18 @@ $ make clean
 $ make
 ```
 
+Make should remove the output and intermediate files after the first command, 
+and generate them again after the second.
+
 ### Makefile no. 3 (Phony Targets)
 
 Typically, ``all`` and ``clean`` are defined as so-called [Phony 
 Targets](https://www.gnu.org/software/make/manual/make.html#Phony-Targets). 
 These are targets that don't actually create an output file. Such targets will 
 always be run if they come up in a dependency, but will no longer be run if a 
-directory/file is created that is called ``all`` or ``clean``. We therefore 
-add a line at the top of the Makefile so that it looks like this:
+directory/file is ever created that is called ``all`` or ``clean``. We 
+therefore add a line at the top of the Makefile to define these two as phony 
+targets:
 
 ```makefile
 # Makefile for analysis report
@@ -360,15 +371,20 @@ clean:
 
 We've replaced the input and output filenames in the recipes respectively by 
 ``$<``, which denotes the *first* prerequisite and ``$@`` which denotes the 
-*target*. There are more automatic variables that you could use, see [the 
+*target*. You can remember ``$<`` because it's like an arrow that points to 
+the beginning (*first* prerequisite), and you can remember ``$@`` (dollar 
+*at*) [as the target you're aiming 
+*at*](https://jameshfisher.com/2016/12/07/makefile-automatic-variables/).
+
+There are more automatic variables that you could use, see [the 
 documentation](https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html).
 
 <a name="pattern_rules">
 
-**Pattern Rules.** Notice that the figure recipes have become identical! 
-Because we don't like to repeat ourselves, we can combine the two rules into a 
-single one by using pattern rules. Pattern rules allow you to use the ``%`` 
-symbol as a wildcard and combine the two rules into one:
+**Pattern Rules.** Notice that the recipes for the figures have become 
+identical!  Because we don't like to repeat ourselves, we can combine the two 
+rules into a single rule by using *pattern rules*. Pattern rules allow you to 
+use the ``%`` symbol as a wildcard and combine the two rules into one:
 
 ```makefile
 # Makefile for analysis report
@@ -391,6 +407,10 @@ clean:
 The ``%`` symbol is now a wildcard that (in our case) takes the value ``1`` or 
 ``2`` based on the input files in the ``data`` directory. You can check that 
 everything still works by running ``make clean`` followed by ``make``.
+
+An advantage of this is that if you now want to add another dataset, say 
+``input_file_3``, then you would only need to add that to the rule for the 
+report!
 
 
 ### Makefile no. 5 (Wildcards and Path Substitution)
