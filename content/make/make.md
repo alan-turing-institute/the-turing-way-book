@@ -105,13 +105,30 @@ follows:
 
 ### Setting up
 
-To start, clone the base repository:
+We have created a basic repository for this task, that already contains 
+everything that we need (*except the Makefile of course!*). To start, clone 
+the base repository using git:
 
 ```bash
 git clone https://github.com/alan-turing-institute/IntroToMake
 ```
 
-This basic repository contains all the code that we'll need in this tutorial:
+This basic repository contains all the code that we'll need in this tutorial, 
+and should have this content:
+
+```text
+.
+├── data/
+│   ├── input_file_1.csv
+│   └── input_file_2.csv
+├── LICENSE
+├── output/
+├── README.md
+├── report/
+│   └── report.tex
+└── scripts/
+    └── generate_histogram.py
+```
 
 - **data**: directory with two datasets that we're going to analyse
 - **report**: the input directory for the report
@@ -121,15 +138,17 @@ This basic repository contains all the code that we'll need in this tutorial:
 You'll notice that there are two datasets in the **data** directory 
 (``input_file_1.csv`` and ``input_file_2.csv``) and that there is already a 
 basic Python script in **scripts** and a basic report LaTeX file in 
-**report**. Ensure that you have the ``matplotlib`` and ``numpy`` packages 
-installed:
+**report**.
+
+If you want to follow along, ensure that you have the ``matplotlib`` and 
+``numpy`` packages installed:
 
 ```bash
-pip install [--user] matplotlib numpy
+pip install matplotlib numpy
 ```
 
 You will also need a working version of ``pdflatex`` and, of course, ``make``. 
-For installation instructions, see [the installation instructions 
+For installation instructions for Make, see [the installation instructions 
 below](#installing-make).
 
 ### Makefile no. 1 (The Basics)
