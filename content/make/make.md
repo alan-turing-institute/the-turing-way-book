@@ -50,7 +50,8 @@ go from the raw input data to the experiments all the way to the pdf file of
 the paper!
 
 ![Schematic of a research project](/assets/figures/make/research_dag.png)
-<small>A schematic for a research project that uses LaTeX.</small>
+<small style="margin: 5pt auto; text-align: center; display: block;">A 
+schematic for a research project that uses LaTeX.</small>
 
 ## An Introduction to Make
 
@@ -219,7 +220,8 @@ combine the three commands in a single recipe above.
 This is what the dependency tree looks like for this Makefile:
 
 ![DAG for Makefile no. 1](/assets/figures/make/makefile_no_1.png)
-<small>The dependency graph for our first Makefile, created using 
+<small style="margin: 5pt auto; text-align: center; display: block;">The 
+dependency graph for our first Makefile, created using 
 [makefile2graph](#tools). Notice the similarity to the figure at the 
 top!</small>
 
