@@ -104,6 +104,9 @@ follows:
 
 (Of course this data task is very simple to focus on how to use Make.)
 
+*Throughout the tutorial code blocks that start with a dollar sign (``$``) are 
+intended to be typed in the terminal.*
+
 ### Setting up
 
 We have created a basic repository for this task, that already contains 
@@ -111,7 +114,7 @@ everything that we need (*except the Makefile of course!*). To start, clone
 the base repository using git:
 
 ```bash
-git clone https://github.com/alan-turing-institute/IntroToMake
+$ git clone https://github.com/alan-turing-institute/IntroToMake
 ```
 
 This basic repository contains all the code that we'll need in this tutorial, 
@@ -145,7 +148,7 @@ If you want to follow along, ensure that you have the ``matplotlib`` and
 ``numpy`` packages installed:
 
 ```bash
-pip install matplotlib numpy
+$ pip install matplotlib numpy
 ```
 
 You will also need a working version of ``pdflatex`` and, of course, ``make``. 
