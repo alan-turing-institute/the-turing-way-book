@@ -571,6 +571,11 @@ $ make -j 4
 The ability to build targets in parallel is quite useful when your project has 
 many dependencies!
 
+The resulting PDF file should now look like this:
+
+![Report with all genres](/assets/figures/make/report_all_genres.png)<small 
+style="margin: 5pt auto; text-align: center; display: block;">A compressed 
+view of the report with histograms for all genres.</small>
 
 
 
