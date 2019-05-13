@@ -36,7 +36,6 @@ Recommended skill level: intermediate
   - [Installing Make](#installing-make)
 
 
-
 ## Summary
 
 A research project can be seen as a tree of dependencies: the paper depends on 
@@ -615,8 +614,8 @@ that you see the debug output and Make doesn't run anything: ``make -dn``.
 
 In the tutorial above we used IMDB movie ratings for different genres as 
 example data. This data was obtained from a dataset [shared on 
-Kaggle](https://www.kaggle.com/orgesleka/imdbmovies#imdb.csv), through a CSV 
-file. The file looks like this:
+Kaggle](https://www.kaggle.com/orgesleka/imdbmovies#imdb.csv) as a CSV file. 
+The file looks like this:
 
 ```text
 fn,tid,title,wordsInTitle,url,imdbRating,ratingCount,duration,year,type,nrOfWins,nrOfNominations,nrOfPhotos,nrOfNewsArticles,nrOfUserReviews,nrOfGenre,Action,Adult,Adventure,Animation,Biography,Comedy,Crime,Documentary,Drama,Family,Fantasy,FilmNoir,GameShow,History,Horror,Music,Musical,Mystery,News,RealityTV,Romance,SciFi,Short,Sport,TalkShow,Thriller,War,Western
@@ -629,15 +628,15 @@ titles01/tt0017925,tt0017925,Der General (1926),der general,http://www.imdb.com/
 While on the surface this looks like a regular CSV file, when you try to open 
 it with the Python CSV library, or Pandas, or R's ``read_csv``, or even 
 ``readr:read_csv``, the data is not loaded correctly. This happens because the 
-CSV file uses an escape character ``\`` when movie names have commas in them 
-and the CSV readers don't automatically detect this variation in the CSV 
+CSV file uses an escape character ``\`` for movie names that have commas in 
+them and the CSV readers don't automatically detect this variation in the CSV 
 format.  It turns out that this is quite a common issue for data scientists: 
 CSV files are often messy and use an uncommon *dialect*: a strange delimiter, 
 uncommon quote characters, etc.  Collectively, data scientists waste quite 
 some time on these data wrangling issues where manual intervention is needed. 
 But this problem is also not that easy to solve: to a computer a CSV file is 
-simply a long string of characters, so how do we determine the dialect 
-accurately in general?
+simply a long string of characters and every dialect will give you *some* 
+table, so how do we determine the dialect accurately in general?
 
 Recently, researchers from the Alan Turing Institute have presented a method 
 that achieves 97% accuracy on a large corpus of CSV files, with an improvement 
@@ -646,21 +645,21 @@ made reproducible through the use of Make and is available through an online
 repository: 
 [https://github.com/alan-turing-institute/CSV_Wrangling](https://github.com/alan-turing-institute/CSV_Wrangling).
 
-Below we will briefly describe how the Makefile for such a project looks like. 
-For the complete file, please see the repository. The Makefile consists of 
-several sections:
+Below we will briefly describe what the Makefile for such a project looks 
+like.  For the complete file, please see the repository. The Makefile consists 
+of several sections:
 
 1. Data collection: because the data is collected from public sources, the 
    repository contains a Python script that allows anyone to download the data 
    through a simple ``make data`` command.
 
-2. All the figures, tables, and constants used in the file are generated based 
-   on the results from the experiments. To make it easy to recreate all 
+2. All the figures, tables, and constants used in the paper are generated 
+   based on the results from the experiments. To make it easy to recreate all 
    results of a certain type, ``.PHONY`` targets are included that depend on 
-   all results of that type. The rules for these outputs follow the same 
-   pattern as those for the figures in the tutorial above. Tables are created 
-   as LaTeX files so they can be directly included in the LaTeX source for the 
-   manuscript.
+   all results of that type (so you could run ``make figures``). The rules for 
+   these outputs follow the same pattern as those for the figures in the 
+   tutorial above.  Tables are created as LaTeX files so they can be directly 
+   included in the LaTeX source for the manuscript.
 
 3. The rules for the detection results follow a specific signature:
 
@@ -674,9 +673,9 @@ several sections:
    [automatic variables](#automatic_var) to extract the input and output 
    filenames.
 
-4. Some of the cleaning rules remove output files that take a while to create. 
-   Therefore, these depend on a special ``check_clean`` target that asks the 
-   user to confirm before proceeding:
+4. Some of the cleaning rules will remove output files that take a while to 
+   create.  Therefore, these depend on a special ``check_clean`` target that 
+   asks the user to confirm before proceeding:
 
    ```makefile
    check_clean:
@@ -687,8 +686,7 @@ It is important to emphasize that this file was not created in one go, but was
 constructed iteratively. The Makefile started as a way to run several dialect 
 detection methods on a collection of input files and gradually grew to include 
 the creation of figures and tables from the result files. Thus the advice for 
-using Make for reproducible research is to start small and to start using Make 
-early.
+using Make for reproducible research is to *start small and start early*.
 
 The published Makefile in the repository does not contain the paper, but this 
 *is* included in the internal Makefile and follows the same structure as the 
@@ -721,8 +719,8 @@ the code, the results, and the manuscript.
 ### Blogs
 
 Of course we are not the first to suggest the use of Make for reproducibility! 
-The blog posts cited here were found after the above tutorial was written, but 
-can add further information and examples.
+The blog posts cited below were found after the above tutorial was written, 
+but can add further information and examples.
 
 - [Reproducibility is 
   hard](https://kbroman.wordpress.com/tag/reproducible-research/). Discusses 
@@ -748,7 +746,7 @@ can add further information and examples.
 
 There are [many alternatives to 
 Make](https://en.wikipedia.org/wiki/List_of_build_automation_software). Below 
-are two that caught our eye and that might be worth a look.
+are some that caught our eye and that might be worth a look.
 
 - [SnakeMake](https://snakemake.readthedocs.io/en/stable/). A Python3-based 
   alternative to Make. Snakemake supports multiple wildcards in filenames, 
@@ -770,12 +768,12 @@ are two that caught our eye and that might be worth a look.
 
 **Makefile:** a text file that contains the configuration for the build
 
-**Rule:** an element of the configuration file that defines something that 
-must be built, usually consists of *targets*, *recipes*, and optionally, 
+**Rule:** an element of the Makefile that defines something that must be 
+built, usually consists of *targets*, *recipes*, and optionally, 
 *prerequisites*.
 
-**Target:** a target is the outcome of a *rule* in a Makefile. It is usually a 
-file. If it is not a file, it's a *phony* target.
+**Target:** the outcome of a *rule* in a Makefile. It is usually a file. If it 
+is not a file, it's a *phony* target.
 
 **Recipe:** one or more shell commands that are executed by Make. Usually 
 these commands update the *target* of the *rule*.
@@ -800,19 +798,21 @@ A Directed Acyclic Graph (DAG) is a *graph* of nodes and edges that is:
    direction
 2. *acyclic*: does not contain cycles: A can't depend on B when B depends on A.
 
-The latter property is of course quite handy for a build system. More on DAGs 
-on [Wikipedia](https://en.wikipedia.org/wiki/Directed_acyclic_graph).
+The latter property is of course quite handy for a build system. More 
+information on DAGs can be found on 
+[Wikipedia](https://en.wikipedia.org/wiki/Directed_acyclic_graph).
 
 ### Installing Make
 
-First check if you have GNU Make installed already. In a terminal type:
+First, check if you have GNU Make installed already. In a terminal type:
 
 ```bash
 $ make
 ```
-If you get ``make: command not found`` (or similar), you don't have make. If 
+
+If you get ``make: command not found`` (or similar), you don't have Make. If 
 you get ``make: *** No targets specified and no makefile found.  Stop.`` you 
-do have make.
+do have Make.
 
 We'll be using **GNU Make** in this tutorial. Verify that this is what you 
 have by typing:
@@ -822,7 +822,7 @@ $ make --version
 ```
 
 If you don't have GNU Make but have the BSD version, some things might not 
-work as expected.
+work as expected and we recommend installing GNU Make.
 
 To install GNU Make, please follow these instructions:
 
@@ -838,7 +838,7 @@ To install GNU Make, please follow these instructions:
   $ sudo apt-get install build-essential
   ```
 
-- **MacOS**: If you have [Homebrew](https://brew.sh/), it's simply:
+- **MacOS**: If you have [Homebrew](https://brew.sh/) installed, it's simply:
 
   ```bash
   $ brew install make
