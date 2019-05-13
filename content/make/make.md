@@ -415,12 +415,12 @@ report!
 
 ### Makefile no. 5 (Wildcards and Path Substitution)
 
-When Makefiles get more complex, you may want to use more "bash-like" features 
+When Makefiles get more complex, you may want to use more advanced features 
 such as building outputs for all the files in an input directory. While 
-pattern rules get you a long way, Make also has features for wildcards and 
-string/path manipulation for when pattern rules are insufficient.
+pattern rules will get you a long way, Make also has features for wildcards 
+and string or path manipulation for when pattern rules are insufficient.
 
-While before our input files were numbered, we'll now switch to a scenario 
+While previously our input files were numbered, we'll now switch to a scenario 
 where they have more meaningful names. Let's switch over to the ``big_data`` 
 branch:
 
@@ -429,10 +429,29 @@ $ git stash                     # stash the state of your working directory
 $ git checkout big_data         # checkout the big_data branch
 ```
 
-If you inspect the **data** directory, you'll notice that there are now 
-additional input files that are named more meaningfully (the data are IMBD 
-movie ratings by genre). Also, the **report.tex** file has been updated to 
-work with the expected figures.
+The directory structure now looks like this:
+
+```text
+├── data/
+│   ├── action.csv
+│   ├── ...
+│   ├── input_file_1.csv
+│   ├── input_file_2.csv
+│   ├── ...
+│   └── western.csv
+├── LICENSE
+├── output/
+├── README.md
+├── report/
+│   └── report.tex
+└── scripts/
+    └── generate_histogram.py
+```
+
+As you can see, the **data** directory now contains additional input files 
+that are named more meaningfully (the data are IMBD movie ratings by genre). 
+Also, the **report.tex** file has been updated to work with the expected 
+figures.
 
 We'll adapt our Makefile to create a figure in the output directory called 
 ``histogram_{genre}.png`` for each ``{genre}.csv`` file, while excluding the 
@@ -447,74 +466,10 @@ Before changing the Makefile, run
 ```bash
 $ make clean
 ```
-
 to remove the output files.
 
-First, we'll create a variable that lists all the CSV files in the data 
-directory and one that lists only the old ``input_file_{N}.csv`` files:
-
-```makefile
-ALL_CSV = $(wildcard data/*.csv)
-INPUT_CSV = $(wildcard data/input_file_*.csv)
-```
-
-A code convention for Makefiles is to use full caps for variable names and 
-define them at the top of the file.
-
-Next, we'll list just the data that we're interested in by filtering out the 
-``INPUT_CSV`` from ``ALL_CSV``:
-
-```makefile
-DATA = $(filter-out $(INPUT_CSV),$(ALL_CSV))
-```
-
-This line uses the 
-[``filter-out``](https://www.gnu.org/software/make/manual/make.html#index-filter_002dout) 
-command to remove items in the ``INPUT_CSV`` variable from the ``ALL_CSV`` 
-variable.  Note that we use both the ``$( ... )`` syntax for functions and 
-variables (the ``${ ...  }`` syntax also works). Finally, we'll use the 
-``DATA`` variable to create a ``FIGURES`` variable with the desired output:
-
-```makefile
-FIGURES = $(patsubst data/%.csv,output/figure_%.png,$(DATA))
-```
-
-Here we've used the 
-[``patsubst``](https://www.gnu.org/software/make/manual/make.html#index-patsubst-1) 
-function to transform the input in the ``DATA`` variable (that follows the 
-``data/{genre}.csv`` pattern) to the desired output filenames (using the 
-``output/figure_{genre}.png`` pattern).
-
-Now we can use these variables for the figure generation rule as follows:
-
-```makefile
-$(FIGURES): output/figure_%.png: data/%.csv scripts/generate_histogram.py
-	python scripts/generate_histogram.py -i $< -o $@
-```
-
-Note that this rule again applies a pattern: it takes a list of targets 
-(``FIGURES``) that all follow a given pattern (``output/figure_%.png``) and 
-based on that creates a prerequisite (``data/%.csv``). Such a pattern rule is 
-slightly different from the one we saw before because it uses two ``:`` 
-symbols. It is called a [static pattern 
-rule](https://www.gnu.org/software/make/manual/make.html#Static-Pattern).
-
-Of course we also have to update the ``report.pdf`` rule:
-
-```makefile
-output/report.pdf: report/report.tex $(FIGURES)
-	cd report/ && pdflatex report.tex && mv report.pdf ../$@
-```
-
-and the ``clean`` rule:
-
-```makefile
-clean:
-	rm -f output/report.pdf
-	rm -f $(FIGURES)
-```
-
-The resulting Makefile should now look like this:
+We'll show the full Makefile first, and then describe the different lines in 
+more detail. The complete file is:
 
 ```makefile
 # Makefile for analysis report
@@ -540,6 +495,72 @@ clean:
 	rm -f $(FIGURES)
 ```
 
+First, we use the ``wildcard`` function to create a variable that lists all 
+the CSV files in the data directory and one that lists only the old 
+``input_file_{N}.csv`` files:
+
+```makefile
+ALL_CSV = $(wildcard data/*.csv)
+INPUT_CSV = $(wildcard data/input_file_*.csv)
+```
+
+A code convention for Makefiles is to use all capitals for variable names and 
+define them at the top of the file.
+
+Next, we create a variable to list only the data files that we're interested 
+in by filtering out the ``INPUT_CSV`` from ``ALL_CSV``:
+
+```makefile
+DATA = $(filter-out $(INPUT_CSV),$(ALL_CSV))
+```
+
+This line uses the 
+[``filter-out``](https://www.gnu.org/software/make/manual/make.html#index-filter_002dout) 
+function to remove items in the ``INPUT_CSV`` variable from the ``ALL_CSV`` 
+variable.  Note that we use both the ``$( ... )`` syntax for functions and 
+variables. Finally, we'll use the ``DATA`` variable to create a ``FIGURES`` 
+variable with the desired output:
+
+```makefile
+FIGURES = $(patsubst data/%.csv,output/figure_%.png,$(DATA))
+```
+
+Here we've used the 
+[``patsubst``](https://www.gnu.org/software/make/manual/make.html#index-patsubst-1) 
+function to transform the input in the ``DATA`` variable (that follows the 
+``data/{genre}.csv`` pattern) to the desired output filenames (using the 
+``output/figure_{genre}.png`` pattern). Notice that the ``%`` character marks 
+the part of the filename that will be the same in both the input and output.
+
+Now we use these variables for the figure generation rule as follows:
+
+```makefile
+$(FIGURES): output/figure_%.png: data/%.csv scripts/generate_histogram.py
+	python scripts/generate_histogram.py -i $< -o $@
+```
+
+This rule again applies a pattern: it takes a list of targets (``$(FIGURES)``) 
+that all follow a given pattern (``output/figure_%.png``) and based on that 
+creates a prerequisite (``data/%.csv``). Such a pattern rule is slightly 
+different from the one we saw before because it uses two ``:`` symbols. It is 
+called a [static pattern 
+rule](https://www.gnu.org/software/make/manual/make.html#Static-Pattern).
+
+Of course we have to update the ``report.pdf`` rule as well:
+
+```makefile
+output/report.pdf: report/report.tex $(FIGURES)
+	cd report/ && pdflatex report.tex && mv report.pdf ../$@
+```
+
+and the ``clean`` rule:
+
+```makefile
+clean:
+	rm -f output/report.pdf
+	rm -f $(FIGURES)
+```
+
 If you run this Makefile, it will need to build 28 figures. You may want to 
 use the ``-j`` flag to ``make`` to build these targets **in parallel!**
 
@@ -548,7 +569,17 @@ $ make -j 4
 ```
 
 The ability to build targets in parallel is quite useful when your project has 
-many dependencies.
+many dependencies!
+
+
+
+
+
+```
+
+
+```
+
 
 ## A Real Reproducible Paper using Make
 
