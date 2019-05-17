@@ -1,3 +1,8 @@
+# Archived
+This repo is no longer in use. All of the concent and discussion should return to [The Turing Way Main Repo](https://github.com/alan-turing-institute/the-turing-way).
+
+---
+
 ## The Turing Way Book
 *For the main repo (where most of the issues live) please [follow this link](https://github.com/alan-turing-institute/the-turing-way).*
 
